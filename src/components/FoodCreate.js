@@ -7,7 +7,7 @@ const FoodCreate = () => {
   const [ingredients, setIngredients] = useState([])
 
   const handleAdd = (ingredient) => {
-    ingredient = {id: ingredient.id, name: ingredient.name, amount: 0, unit: "gr"}
+    ingredient = {id: ingredient.id, name: ingredient.name, amount: 0, unit: "g"}
     setIngredients([...ingredients, ingredient])
   }
 

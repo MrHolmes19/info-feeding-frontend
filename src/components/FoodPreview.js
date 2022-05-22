@@ -18,7 +18,7 @@ const FoodPreview = ({ingredients, handleUpdate, handleDelete}) => {
       headers: { "content-type": "application/json" },
     };
 
-    let endpoint = "http://127.0.0.1:8000/api/foods"
+    let endpoint = "http://127.0.0.1:8000/api/foods/"
 
     console.log("data a postear: ", data)
     helpHttp().post(endpoint, options).then((res) => {

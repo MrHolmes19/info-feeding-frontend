@@ -2,9 +2,18 @@ import React, { useState } from 'react'
 import IngredientListItem from './IngredientListItem';
 import ModalIngredient from './ModalIngredient';
 
+const initItem = {
+  name : '',
+  proteins: 0,
+  water: 0,
+  total_carbohydrates: 0,
+  total_fats: 0,
+
+}
+
 const Response = ({response, handleAdd}) => {
 
-  const [selectedItem, setSelectedItem] = useState(null)
+  const [selectedItem, setSelectedItem] = useState(initItem)
 
   const handleOnClick = (data) => {
     setSelectedItem(data);
@@ -25,7 +34,8 @@ const Response = ({response, handleAdd}) => {
           add={true} handleAdd={handleAdd}/>)}
         </div>
       }
-      {selectedItem && <ModalIngredient item = {selectedItem}/>}
+      {/* {selectedItem && <ModalIngredient item = {selectedItem}/>} */}
+      <ModalIngredient item = {selectedItem}/>
     </div>
   )
 }
