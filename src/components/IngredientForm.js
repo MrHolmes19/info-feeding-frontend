@@ -24,7 +24,7 @@ const IngredientForm = ({handleSearch}) => {
       alert("Por favor, ingresá algo");
       return;
     }
-
+    setForm(initialForm)
     handleSearch(form);
     //setForm(initialForm);
   };

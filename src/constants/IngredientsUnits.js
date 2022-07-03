@@ -85,8 +85,5 @@ const getUnit = (nutrient) =>{
 
 
 //export ingredientUnits
-
-
-
-console.log(ingredientUnits)
-console.log(getUnit)
+// console.log(ingredientUnits)
+// console.log(getUnit)

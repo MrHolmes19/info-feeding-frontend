@@ -18,7 +18,7 @@ const Response = ({response, handleAdd}) => {
   const handleOnClick = (data) => {
     setSelectedItem(data);
   };
-
+ 
   if(!response) return null;
   return (
     <div>      
@@ -29,9 +29,14 @@ const Response = ({response, handleAdd}) => {
         </p>
       :
         <div className="fs-3 text-success">
-          {response.map(ingredient => 
-          <IngredientListItem handleOnClick={handleOnClick} item = {ingredient} key={ingredient.id} 
-          add={true} handleAdd={handleAdd}/>)}
+          {response.map((ingredient) => 
+            <IngredientListItem 
+              key={ingredient.name} 
+              handleOnClick={handleOnClick} 
+              item={ingredient} 
+              add={true} handleAdd={handleAdd}
+            />
+          )}
         </div>
       }
       {/* {selectedItem && <ModalIngredient item = {selectedItem}/>} */}

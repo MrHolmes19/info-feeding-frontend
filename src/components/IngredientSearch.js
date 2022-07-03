@@ -4,10 +4,33 @@ import Loader from './Loader';
 import Response from './Response';
 //import { helpHttp } from "../helpers/helpHttp";
 
-const IngredientSearch = ({handleAdd}) => {
+const IngredientSearch = ({handleAdd, ingredients}) => {
   const [search, setSearch] = useState(null)
   const [response, setResponse] = useState(null)
   const [loading, setLoading] = useState(false)
+  
+
+  const filterResponse = (ingFetched) => {
+    const ingredientsFiltered = ingFetched.filter((el) => {
+      return !ingredients.some((f) => {
+        return f.name === el.name;
+      });
+    });
+    return ingredientsFiltered
+  }
+
+  const removeSelf = (item) => {
+    let filteredResponse = response.filter(
+      (x) => x.name !== item.name
+    )
+    setResponse(filteredResponse)
+  }
+
+  const handleAddandRemove = (item) => {
+    removeSelf(item)
+    handleAdd(item)
+  }
+
 
   useEffect(() => {
     if (search === null) return;
@@ -19,7 +42,7 @@ const IngredientSearch = ({handleAdd}) => {
 
       setLoading(true);
 
-      const [ingModel] = await Promise.all([
+      const [ingFetched] = await Promise.all([
         // helpHttp().get(endpoint),
         fetch(endpoint)
           .then((res) =>
@@ -33,8 +56,9 @@ const IngredientSearch = ({handleAdd}) => {
           )
           .catch((err) => (err))
       ]);
-      
-      setResponse(ingModel);
+      // setResponse(ingFetched);
+      const ingToShow = filterResponse(ingFetched)
+      setResponse(ingToShow);
       setLoading(false);
     };
 
@@ -57,7 +81,7 @@ const IngredientSearch = ({handleAdd}) => {
         <p className="mb-4 fs-5">Resultados:</p>  
               
         {search && !loading && (
-          <Response response={response} handleAdd={handleAdd}/>
+          <Response response={response} handleAdd={handleAddandRemove}/>
         )}        
       </div>
     </div>

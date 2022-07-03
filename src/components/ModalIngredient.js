@@ -26,7 +26,7 @@ const ModalIngredient = ({item}) => {
     item["water"],
   ]
 
-  console.log(chart.datasets[0].data)
+  // console.log(chart.datasets[0].data)
   return (    
     <div className="modal fade" id="ingredientModal" tabIndex="-1" aria-labelledby="ingredientLabel" aria-hidden="true">
       <div className="modal-dialog">
