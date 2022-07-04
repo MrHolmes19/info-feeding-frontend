@@ -11,11 +11,6 @@ function App() {
         <Routes>
           <Route path="/ingredient-search" element={<IngredientSearch/>}/> 
           <Route path="/food-creation" element={<FoodCreate/>}/>
-          {/* 
-          <Route path="/foods" element={<FoodSearch/>}/>
-          <Route path="/foods/:id" element={<FoodDetails/>}/>
-          <Route path="*" element={<Error404/>}/> 
-          */}
         </Routes>
       </HashRouter>  
 

@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Routes from './config/router'
+// TODO: Add here Providers for authentication, initstates, queries, etc.
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
+    <Routes /> 
   </React.StrictMode>,
   document.getElementById('root')
 );
