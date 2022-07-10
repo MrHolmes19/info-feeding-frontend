@@ -1,11 +1,14 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useState } from 'react'
-import { helpHttp } from '../helpers/helpHttp'
-import Input from './Input'
-import TextArea from './TextArea'
+import { helpHttp } from '../../helpers/helpHttp'
+import Input from '../../components/Input'
+import TextArea from '../../components/TextArea'
+import FoodContext from './FoodCreate'
 
-const ModalFoodCreation = ({food}) => {
+const ModalFoodCreation = () => {
   
+  const { previewFoodItems: food } = useContext(FoodContext)
+
   const initialState = {
     ingredients: food,
     name: "",
@@ -88,7 +91,8 @@ const ModalFoodCreation = ({food}) => {
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             {/* <button type="submit" className="btn btn-success">Save food</button> */}            
-            <input type="submit" form="food-form" value="Update" className="btn btn-success"/>
+            {/* <input type="submit" form="food-form" value="Update" className="btn btn-success"/> */}
+            <input type="submit" form="food-form" value="Update" className="btn btn-success">Save Food</input>
           </div>
         </div>
       </div>

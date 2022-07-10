@@ -1,14 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import IngredientForm from './IngredientForm';
-import Loader from './Loader';
-import Response from './Response';
-//import { helpHttp } from "../helpers/helpHttp";
+import Loader from '../../components/Loader';
+import IngredientResponse from './IngredientResponse';
+//import { helpHttp } from "../../helpers/helpHttp";
+import FoodContext from './FoodCreate'
 
-const IngredientSearch = ({handleAdd, ingredients}) => {
+const IngredientSearch = () => {
   const [search, setSearch] = useState(null)
   const [response, setResponse] = useState(null)
   const [loading, setLoading] = useState(false)
-  
+  const { ingredients, setIngredients, previewFoodItems, setPreviewFoodItems } = useContext(FoodContext)
+
+  const handleAdd = (ingredient) => {
+    setIngredients([...ingredients, ingredient])
+    const newPreviewItem = {
+      "name": ingredient.name,
+      "amount": 0,
+      "unit": "",
+      "presentation": ""
+    }
+    setPreviewFoodItems([...previewFoodItems, newPreviewItem])
+  }
 
   const filterResponse = (ingFetched) => {
     const ingredientsFiltered = ingFetched.filter((el) => {
@@ -56,7 +68,6 @@ const IngredientSearch = ({handleAdd, ingredients}) => {
           )
           .catch((err) => (err))
       ]);
-      // setResponse(ingFetched);
       const ingToShow = filterResponse(ingFetched)
       setResponse(ingToShow);
       setLoading(false);
@@ -81,7 +92,7 @@ const IngredientSearch = ({handleAdd, ingredients}) => {
         <p className="mb-4 fs-5">Resultados:</p>  
               
         {search && !loading && (
-          <Response response={response} handleAdd={handleAddandRemove}/>
+          <IngredientResponse response={response} handleAdd={handleAddandRemove}/>
         )}        
       </div>
     </div>

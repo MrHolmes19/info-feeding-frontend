@@ -8,10 +8,9 @@ const initItem = {
   water: 0,
   total_carbohydrates: 0,
   total_fats: 0,
-
 }
 
-const Response = ({response, handleAdd}) => {
+const IngredientResponse = ({response, handleAdd}) => {
 
   const [selectedItem, setSelectedItem] = useState(initItem)
 
@@ -45,4 +44,4 @@ const Response = ({response, handleAdd}) => {
   )
 }
 
-export default Response
+export default IngredientResponse

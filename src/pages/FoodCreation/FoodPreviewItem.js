@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import FoodContext from './FoodCreate'
 
-const FoodPreviewItem = ({item, handleUpdate, handleDelete}) => {
+const FoodPreviewItem = ({ item }) => {
 
   const initFullItem = {
     "name": item.name,
@@ -10,6 +11,19 @@ const FoodPreviewItem = ({item, handleUpdate, handleDelete}) => {
   }
   const [presentationSelected, setPresentationSelected] = useState(null)
   const [fullItem, setFullItem] = useState(initFullItem)
+  const { ingredients, setIngredients, previewFoodItems, setPreviewFoodItems } = useContext(FoodContext)
+
+  const handleUpdate = (ingredient) => {
+    let newData = previewFoodItems.map((ing) => (ing.name === ingredient.name ? ingredient : ing));
+    setPreviewFoodItems(newData)
+  }
+
+  const handleDelete = (name) => {
+    let newData = ingredients.filter((ing) => ing.name !== name);
+    setIngredients(newData)
+    let newPreview = previewFoodItems.filter((ing) => ing.name !== name);
+    setPreviewFoodItems(newPreview)
+  }
 
   const handleUnit = (e) =>{
     const newItem = fullItem
@@ -36,14 +50,12 @@ const FoodPreviewItem = ({item, handleUpdate, handleDelete}) => {
     setFullItem(newItem)
     handleUpdate(newItem)
   }
-  // console.log("item: ", item, "presentations: ", item.presentations)
-  // console.log("presentationSelected: ", presentationSelected)
+
   return (
     <tr>
       <td><label className="ms-2 me-5">- {item.name}</label></td>
       <td>
-        <select onChange={handlePresentation}>
-          <option selected>Seleccionar</option>
+        <select onChange={handlePresentation} defaultValue="Seleccionar">
           {item.presentations.map((op) => (
             <option key={op.presentation} value={op.presentation}>{op.presentation}</option>
           ))}
@@ -56,7 +68,7 @@ const FoodPreviewItem = ({item, handleUpdate, handleDelete}) => {
             ? presentationSelected.allowed_units.map((op) => (
               <option value={op} key={op}>{op}</option>
               ))
-            : <option selected> Seleccionar</option> // <option selected>Elige presentacion</option>
+            : <option> Seleccionar</option>
           }
         </select>
       </td>
