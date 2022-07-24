@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import FoodContext from './FoodCreate'
+import { FoodContext } from './FoodCreate'
 
 const FoodPreviewItem = ({ item }) => {
 

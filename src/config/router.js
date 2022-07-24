@@ -6,6 +6,7 @@ import { MainRoutes, IngredientsRoutes, FoodRoutes } from './routePaths';
 
 import FoodCreate from '../pages/FoodCreation/FoodCreate';
 import NotFound from '../pages/NotFound/NotFound';
+import IngredientSearch from '../pages/FoodCreation/IngredientSearch';
 
 export default function RouterPaths() {
 
@@ -17,8 +18,8 @@ export default function RouterPaths() {
       <Routes>
         <Route path="*" element={<NotFound/>}/>
         <Route path={MainRoutes.Root} element={<Navigate to={FoodRoutes.Search}/>} />
-        <Route path={FoodRoutes.Search} element={<FoodCreate/>}/>
-        <Route path={IngredientsRoutes.Search} element={<NotFound/>}/>
+        <Route path={FoodRoutes.Creation} element={<FoodCreate/>}/>
+        <Route path={IngredientsRoutes.Search} element={<IngredientSearch/>}/>
       </Routes>
     </Router>
   )

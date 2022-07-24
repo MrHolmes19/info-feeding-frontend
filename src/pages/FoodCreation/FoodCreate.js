@@ -3,7 +3,7 @@ import FoodPreview from './FoodPreview'
 import IngredientSearch from './IngredientSearch'
 import ModalFoodCreation from './ModalFoodCreation'
 
-const FoodContext = createContext()
+export const FoodContext = createContext()
 
 function FoodCreationProvider({ children }){
   const [ingredients, setIngredients] = useState([])

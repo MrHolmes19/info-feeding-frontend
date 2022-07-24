@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { helpHttp } from '../../helpers/helpHttp'
 import Input from '../../components/Input'
 import TextArea from '../../components/TextArea'
-import FoodContext from './FoodCreate'
+import { FoodContext } from './FoodCreate'
 
 const ModalFoodCreation = () => {
   
@@ -19,7 +19,7 @@ const ModalFoodCreation = () => {
     difficulty: "",
     portions: "",
     recipe: "",
-    image: "",
+    // image: "",
     type: "",
     group: ""
   }
@@ -27,8 +27,7 @@ const ModalFoodCreation = () => {
   const [foodForm, setFoodForm] = useState(initialState)
   
   useEffect(() => {
-    setFoodForm({...foodForm, ingredients: food})
-  
+    setFoodForm({...foodForm, ingredients: food})  
   }, [food])
   
 
@@ -36,9 +35,20 @@ const ModalFoodCreation = () => {
     e.preventDefault()
     console.log(foodForm)
     const endpoint = "http://127.0.0.1:8000/api/foods/"
+
+    let formData = new FormData()
+    Object.entries(foodForm).map((foodItem)=>(
+      typeof(foodItem[1])==="object" && foodItem[1] !== undefined
+      ? formData.append(`${foodItem[0]}`, JSON.stringify(foodItem[1]))
+      : formData.append(`${foodItem[0]}`, foodItem[1])
+    ))
+    
+    console.log("formData: ", ...formData)
     let options = {
-      body: foodForm,
-      headers: { "content-type": "application/json" },
+      // body: formData,
+      // headers: { "content-type": "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW" },
+        body: foodForm,
+        headers: { "content-type": "application/json" },
     };
     helpHttp().post(endpoint, options).then((res) => {
       if (!res.err) {
@@ -79,7 +89,7 @@ const ModalFoodCreation = () => {
               <Input name="portions" label="Porciones" handleChange={handleChange}/>
               <Input name="difficulty" label="Dificultad" handleChange={handleChange} />
               <TextArea name="recipe" label="Receta" handleChange={handleChange} />
-              <Input name="image" label="imagen" handleChange={handleChange} />
+              {/* <input type="file" name="image" label="imagen" handleChange={handleChange} /> */}
               <Input name="type" label="Tipo" handleChange={handleChange} />
               <Input name="group" label="Grupo" handleChange={handleChange} />
 
@@ -90,9 +100,7 @@ const ModalFoodCreation = () => {
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            {/* <button type="submit" className="btn btn-success">Save food</button> */}            
-            {/* <input type="submit" form="food-form" value="Update" className="btn btn-success"/> */}
-            <input type="submit" form="food-form" value="Update" className="btn btn-success">Save Food</input>
+            <input type="submit" form="food-form" value="Create" className="btn btn-success"/>
           </div>
         </div>
       </div>

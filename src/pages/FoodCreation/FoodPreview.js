@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { helpHttp } from '../../helpers/helpHttp'
 import FoodPreviewItem from './FoodPreviewItem'
-import FoodContext from './FoodCreate'
+import {FoodContext} from './FoodCreate'
 
 const FoodPreview = () => {
 

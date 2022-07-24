@@ -3,7 +3,7 @@ import IngredientForm from './IngredientForm';
 import Loader from '../../components/Loader';
 import IngredientResponse from './IngredientResponse';
 //import { helpHttp } from "../../helpers/helpHttp";
-import FoodContext from './FoodCreate'
+import {FoodContext} from './FoodCreate'
 
 const IngredientSearch = () => {
   const [search, setSearch] = useState(null)
